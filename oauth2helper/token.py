@@ -74,6 +74,7 @@ def _request_x5c(json_body, kid):
     for key in keys_json.get('keys', []):
         if key['kid'] == kid:
             return key['x5c'][0]
+    raise ValueError('{0} cannot be found in {1}.'.format(kid, keys_json))
 
 
 def _to_json(base_64_json):
