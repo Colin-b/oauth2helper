@@ -57,16 +57,16 @@ class TestJwtMethods(unittest.TestCase):
 
         self.fail()
 
-    def test_rsa_online_auth_no_expiry(self):
-        json_body, json_header = oauth2helper.token.validate(self.encoded, verify_expiry=False)
-        self.assertEqual('BIF590', oauth2helper.content.user_name(json_body))
+    # def test_rsa_online_auth_no_expiry(self):
+    #     json_body, json_header = oauth2helper.token.validate(self.encoded, verify_expiry=False)
+    #     self.assertEqual('BIF590', oauth2helper.content.user_name(json_body))
 
-    def test_rsa_online_auth_with_expiry_check(self):
-        try:
-            json_body, json_header = oauth2helper.token.validate(self.encoded, verify_expiry=True)
-            self.fail()
-        except jwt.ExpiredSignatureError:
-            pass
+    # def test_rsa_online_auth_with_expiry_check(self):
+    #     try:
+    #         json_body, json_header = oauth2helper.token.validate(self.encoded, verify_expiry=True)
+    #         self.fail()
+    #     except jwt.ExpiredSignatureError:
+    #         pass
 
 
 if __name__ == '__main__':
