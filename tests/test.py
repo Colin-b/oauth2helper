@@ -47,7 +47,7 @@ class TestJwtMethods(unittest.TestCase):
         body_json = json.loads(body_str_json)
         self.assertEqual(body_json['upn'].split('@')[0], 'BIF590')
 
-        keys_str_json = open(os.path.join(os.path.dirname(__file__),'discovery.json'), 'r').read()
+        keys_str_json = open(os.path.join(os.path.dirname(__file__), 'discovery.json'), 'r').read()
         keys_json = json.loads(keys_str_json)
 
         for key in keys_json['keys']:
