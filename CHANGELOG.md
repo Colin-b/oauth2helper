@@ -1,4 +1,4 @@
-# OAuth2 Changelog #
+# OAuth2 Helper Changelog #
 
 ## 0.1 (next) ##
 

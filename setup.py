@@ -15,7 +15,7 @@ setup(name='oauth2helper',
       maintainer='Engie',
       # TODO Provide a support mailbox for our products
       maintainer_email='colin.bounouar@external.engie.com',
-      url="http://guru.trading.gdfsuez.net/bitbucket/projects/AUT/repos/oauth2",
+      url="http://guru.trading.gdfsuez.net/bitbucket/projects/AUT/repos/oauth2helper",
       description="Provide information on OAuth2",
       long_description=long_description,
       # TODO Package to artifactory and assert that bamboo will keep it up to date
