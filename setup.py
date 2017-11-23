@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 this_dir = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(this_dir, 'README'), 'r') as f:
+with open(os.path.join(this_dir, 'README.md'), 'r') as f:
     long_description = f.read()
 
 # More information on properties: https://packaging.python.org/distributing

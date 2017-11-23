@@ -1,6 +1,6 @@
 # Provide information on OAuth2 #
 
-## Validating a OAuth2 token ##
+## Validating an OAuth2 token ##
 
 ```python
 from oauth2helper.token import validate
