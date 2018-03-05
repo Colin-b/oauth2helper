@@ -23,10 +23,10 @@ def decode(jwt_token: str) -> (dict, dict):
     if not jwt_token:
         raise ValueError('JWT Token is mandatory.')
 
-    if jwt_token.count('.') < 3:
+    if jwt_token.count('.') < 2:
         raise ValueError('Invalid JWT Token (header, body and sign must be separated by dots).')
 
-    (jwt_header, jwt_body, jwt_sign) = jwt_token.split('.', maxsplit=3)
+    (jwt_header, jwt_body, jwt_sign) = jwt_token.split('.', maxsplit=2)
 
     return _to_json(jwt_header), _to_json(jwt_body)
 
@@ -77,7 +77,7 @@ def _request_x5c(json_body: dict, kid: str) -> str:
     for key in keys_json.get('keys', []):
         if key['kid'] == kid:
             return key['x5c'][0]
-    raise ValueError(f'{kid} cannot be found in {keys_json}.')
+    raise ValueError(f'{kid} cannot be found in kid within {keys_json}.')
 
 
 def _to_json(base_64_json: str) -> dict:
