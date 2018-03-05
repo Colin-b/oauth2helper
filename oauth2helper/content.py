@@ -1,4 +1,4 @@
-def user_name(json_body):
+def user_name(json_body: dict) -> str:
     """
     Return user name stored in JSON body.
     """

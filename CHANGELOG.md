@@ -6,7 +6,11 @@ List all changes in various categories:
 * Bug fixes
 * Known issues
 
-## Version 0.1.1 (2018-03-02) ##
+## Version 1.0.0 (2018-03-05) ##
+
+### Release notes ###
+
+- Drop compatibility with python < 3.6.
 
 ### Bug fixes ###
 

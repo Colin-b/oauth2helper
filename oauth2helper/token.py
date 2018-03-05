@@ -7,7 +7,7 @@ from cryptography.hazmat.backends import default_backend
 import logging
 
 
-def validate(jwt_token, verify_expiry=True):
+def validate(jwt_token: str, verify_expiry: bool=True) -> (dict, dict):
     """
     Validate token and return JSON header and body as a tuple.
     """
@@ -16,7 +16,7 @@ def validate(jwt_token, verify_expiry=True):
     return json_header, json_body
 
 
-def decode(jwt_token):
+def decode(jwt_token: str) -> (dict, dict):
     """
     Decode base64 encoded token and return JSON decoded header and body as a tuple.
     """
@@ -26,14 +26,14 @@ def decode(jwt_token):
     if jwt_token.count('.') < 3:
         raise ValueError('Invalid JWT Token (header, body and sign must be separated by dots).')
 
-    (jwt_header, jwt_body, jwt_sign) = jwt_token.split('.')
+    (jwt_header, jwt_body, jwt_sign) = jwt_token.split('.', maxsplit=3)
 
     return _to_json(jwt_header), _to_json(jwt_body)
 
 
-def _validate_json_token(jwt_token, verify_expiry, json_header, json_body):
+def _validate_json_token(jwt_token: str, verify_expiry: bool, json_header: dict, json_body: dict):
     public_key = _get_public_key(json_body, json_header)
-    logging.debug('Public key: {0}'.format(public_key))
+    logging.debug(f'Public key: {public_key}')
 
     jwt.decode(jwt_token, public_key, options={
         'verify_signature': True,
@@ -47,7 +47,7 @@ def _validate_json_token(jwt_token, verify_expiry, json_header, json_body):
     })
 
 
-def _get_public_key(json_body, json_header):
+def _get_public_key(json_body: dict, json_header: dict):
     kid = json_header.get('kid')
     if not kid:
         raise ValueError('No kid in JSON header.')
@@ -60,7 +60,7 @@ def _get_public_key(json_body, json_header):
     return certificate.public_key()
 
 
-def _request_x5c(json_body, kid):
+def _request_x5c(json_body: dict, kid: str) -> str:
     iss = json_body.get('iss')
     if iss is None:
         raise ValueError('No iss (i.e. identity provider) in JSON body.')
@@ -71,21 +71,21 @@ def _request_x5c(json_body, kid):
 
     idp = iss.split(tid)[0]
 
-    keys_response = requests.get(idp + 'common/discovery/keys')
+    keys_response = requests.get(f'{idp}common/discovery/keys')
     keys_json = keys_response.json()
 
     for key in keys_json.get('keys', []):
         if key['kid'] == kid:
             return key['x5c'][0]
-    raise ValueError('{0} cannot be found in {1}.'.format(kid, keys_json))
+    raise ValueError(f'{kid} cannot be found in {keys_json}.')
 
 
-def _to_json(base_64_json):
+def _to_json(base_64_json: str) -> dict:
     decoded_json = decode_base64(base_64_json)
     return json.loads(decoded_json.decode('unicode_escape'))
 
 
-def decode_base64(base64_encoded_string):
+def decode_base64(base64_encoded_string: str) -> bytes:
     """
     Decode base64, padding being optional.
 
