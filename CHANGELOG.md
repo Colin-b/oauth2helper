@@ -1,7 +1,14 @@
 # OAuth2 Helper Changelog #
 
-## 0.1 (next) ##
+List all changes in various categories:
+* Release notes: Contains all worth noting changes (breaking changes mainly)
+* Enhancements
+* Bug fixes
+* Known issues
 
-### Release notes ###
+## Version 0.1.1 (2018-03-02) ##
 
-Initial version allowing to return user corresponding to a OAuth2 token.
+### Bug fixes ###
+
+- Return a user friendly exception in case it is not possible to split token.
+- Update dependencies to latest version.

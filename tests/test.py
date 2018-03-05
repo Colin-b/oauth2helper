@@ -5,8 +5,8 @@ from cryptography.hazmat.backends import default_backend
 import base64
 import json
 import os
+
 import oauth2helper.token
-import oauth2helper.content
 
 
 class TestJwtMethods(unittest.TestCase):
@@ -32,11 +32,8 @@ class TestJwtMethods(unittest.TestCase):
 
         decoded = jwt.decode(self.encoded, public_key, options=options)
 
-        try:
-            decoded = jwt.decode(self.encoded, public_key)
-            self.fail()
-        except jwt.ExpiredSignatureError:
-            pass
+        with self.assertRaises(jwt.ExpiredSignatureError):
+            jwt.decode(self.encoded, public_key)
 
     def test_rsa_discovery(self):
         (jwt_header, jwt_body, jwt_sign) = self.encoded.split(b'.')
@@ -56,6 +53,36 @@ class TestJwtMethods(unittest.TestCase):
                 return
 
         self.fail()
+
+    def test_None_token_cannot_be_decoded(self):
+        with self.assertRaises(ValueError) as cm:
+            oauth2helper.token.decode(None)
+        self.assertEqual('JWT Token is mandatory.', cm.exception.args[0])
+
+    def test_None_token_cannot_be_validated(self):
+        with self.assertRaises(ValueError) as cm:
+            oauth2helper.token.validate(None)
+        self.assertEqual('JWT Token is mandatory.', cm.exception.args[0])
+
+    def test_empty_token_cannot_be_decoded(self):
+        with self.assertRaises(ValueError) as cm:
+            oauth2helper.token.decode('')
+        self.assertEqual('JWT Token is mandatory.', cm.exception.args[0])
+
+    def test_empty_token_cannot_be_validated(self):
+        with self.assertRaises(ValueError) as cm:
+            oauth2helper.token.validate('')
+        self.assertEqual('JWT Token is mandatory.', cm.exception.args[0])
+
+    def test_invalid_token_cannot_be_decoded(self):
+        with self.assertRaises(ValueError) as cm:
+            oauth2helper.token.decode('Invalid token')
+        self.assertEqual('Invalid JWT Token (header, body and sign must be separated by dots).', cm.exception.args[0])
+
+    def test_invalid_token_cannot_be_validated(self):
+        with self.assertRaises(ValueError) as cm:
+            oauth2helper.token.validate('Invalid token')
+        self.assertEqual('Invalid JWT Token (header, body and sign must be separated by dots).', cm.exception.args[0])
 
     # def test_rsa_online_auth_no_expiry(self):
     #     json_body, json_header = oauth2helper.token.validate(self.encoded, verify_expiry=False)

@@ -7,14 +7,15 @@ with open(os.path.join(this_dir, 'README.md'), 'r') as f:
     long_description = f.read()
 
 # More information on properties: https://packaging.python.org/distributing
+from oauth2helper._version import __version__
 setup(name='oauth2helper',
-      version=open("oauth2helper/_version.py").readlines()[-1].split()[-1].strip("\"'"),
+      version=__version__,
       author='Engie',
       # TODO Provide a support mailbox for our products
-      author_email='colin.bounouar@external.engie.com',
+      author_email='colin.bounouar@engie.com',
       maintainer='Engie',
       # TODO Provide a support mailbox for our products
-      maintainer_email='colin.bounouar@external.engie.com',
+      maintainer_email='colin.bounouar@engie.com',
       url="http://guru.trading.gdfsuez.net/bitbucket/projects/AUT/repos/oauth2helper",
       description="Provide information on OAuth2",
       long_description=long_description,
@@ -43,11 +44,11 @@ setup(name='oauth2helper',
       ],
       install_requires=[
           # Used to retrieve keys
-          'requests==2.6.0',
+          'requests==2.18.4',
           # Used to decode tokens
-          'pyjwt',
+          'pyjwt==1.6.0',
           # Used to handle certificate
-          'cryptography==1.8.1'
+          'cryptography==2.1.4'
       ],
       platforms=[
           'Windows'

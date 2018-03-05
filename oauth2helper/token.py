@@ -23,6 +23,9 @@ def decode(jwt_token):
     if not jwt_token:
         raise ValueError('JWT Token is mandatory.')
 
+    if jwt_token.count('.') < 3:
+        raise ValueError('Invalid JWT Token (header, body and sign must be separated by dots).')
+
     (jwt_header, jwt_body, jwt_sign) = jwt_token.split('.')
 
     return _to_json(jwt_header), _to_json(jwt_body)
