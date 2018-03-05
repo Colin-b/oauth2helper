@@ -7,12 +7,23 @@ from cryptography.hazmat.backends import default_backend
 import logging
 
 
-def validate(jwt_token: str, verify_expiry: bool=True) -> (dict, dict):
+def validate(jwt_token: str, **options) -> (dict, dict):
     """
     Validate token and return JSON header and body as a tuple.
+
+    :param jwt_token: JWT Token as provided in Bearer header.
+
+    :param verify_signature: Default to True
+    :param verify_exp: Default to True
+    :param verify_nbf: Default to True
+    :param verify_iat: Default to True
+    :param verify_aud: Default to False
+    :param require_exp: Default to True
+    :param require_iat: Default to True
+    :param require_nbf: Default to True
     """
     json_header, json_body = decode(jwt_token)
-    _validate_json_token(jwt_token, verify_expiry, json_header, json_body)
+    _validate_json_token(jwt_token, json_header, json_body, options)
     return json_header, json_body
 
 
@@ -31,20 +42,23 @@ def decode(jwt_token: str) -> (dict, dict):
     return _to_json(jwt_header), _to_json(jwt_body)
 
 
-def _validate_json_token(jwt_token: str, verify_expiry: bool, json_header: dict, json_body: dict):
+def _validate_json_token(jwt_token: str, json_header: dict, json_body: dict, options: dict):
     public_key = _get_public_key(json_body, json_header)
     logging.debug(f'Public key: {public_key}')
 
-    jwt.decode(jwt_token, public_key, options={
+    default_options = {
         'verify_signature': True,
-        'verify_exp': verify_expiry,
+        'verify_exp': True,
         'verify_nbf': True,
         'verify_iat': True,
         'verify_aud': False,
         'require_exp': True,
         'require_iat': True,
         'require_nbf': True
-    })
+    }
+    default_options.update(options)
+
+    jwt.decode(jwt_token, public_key, options=default_options)
 
 
 def _get_public_key(json_body: dict, json_header: dict):

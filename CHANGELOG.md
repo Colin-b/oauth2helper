@@ -11,6 +11,11 @@ List all changes in various categories:
 ### Release notes ###
 
 - Drop compatibility with python < 3.6.
+- validate optional parameter verify_expiry renamed into verify_exp.
+
+### Enhancements ###
+
+- Every JWT validation option can now be provided as kwargs to validate.
 
 ### Bug fixes ###
 
