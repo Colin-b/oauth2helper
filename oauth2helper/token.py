@@ -6,6 +6,17 @@ from cryptography.x509 import load_pem_x509_certificate
 from cryptography.hazmat.backends import default_backend
 import logging
 
+_default_options = {
+    'verify_signature': True,
+    'verify_exp': True,
+    'verify_nbf': True,
+    'verify_iat': True,
+    'verify_aud': False,
+    'require_exp': True,
+    'require_iat': True,
+    'require_nbf': True
+}
+
 
 def validate(jwt_token: str, **options) -> (dict, dict):
     """
@@ -14,7 +25,7 @@ def validate(jwt_token: str, **options) -> (dict, dict):
     :param jwt_token: JWT Token as provided in Bearer header.
 
     :param verify_signature: Default to True
-    :param verify_exp: Default to True
+    :param verify_exp: Check token expiry. Default to True
     :param verify_nbf: Default to True
     :param verify_iat: Default to True
     :param verify_aud: Default to False
@@ -35,9 +46,9 @@ def decode(jwt_token: str) -> (dict, dict):
         raise ValueError('JWT Token is mandatory.')
 
     if jwt_token.count('.') < 2:
-        raise ValueError('Invalid JWT Token (header, body and sign must be separated by dots).')
+        raise ValueError('Invalid JWT Token (header, body and signature must be separated by dots).')
 
-    (jwt_header, jwt_body, jwt_sign) = jwt_token.split('.', maxsplit=2)
+    (jwt_header, jwt_body, jwt_signature) = jwt_token.split('.', maxsplit=2)
 
     return _to_json(jwt_header), _to_json(jwt_body)
 
@@ -45,20 +56,7 @@ def decode(jwt_token: str) -> (dict, dict):
 def _validate_json_token(jwt_token: str, json_header: dict, json_body: dict, options: dict):
     public_key = _get_public_key(json_body, json_header)
     logging.debug(f'Public key: {public_key}')
-
-    default_options = {
-        'verify_signature': True,
-        'verify_exp': True,
-        'verify_nbf': True,
-        'verify_iat': True,
-        'verify_aud': False,
-        'require_exp': True,
-        'require_iat': True,
-        'require_nbf': True
-    }
-    default_options.update(options)
-
-    jwt.decode(jwt_token, public_key, options=default_options)
+    jwt.decode(jwt_token, public_key, options={**_default_options, **options})
 
 
 def _get_public_key(json_body: dict, json_header: dict):
