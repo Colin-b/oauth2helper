@@ -12,6 +12,7 @@ List all changes in various categories:
 
 - Drop compatibility with python < 3.6.
 - validate optional parameter verify_expiry renamed into verify_exp.
+- jwt errors are now thrown instead of ValueError in order for client to catch it easily.
 
 ### Enhancements ###
 
