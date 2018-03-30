@@ -37,7 +37,8 @@ def validate(jwt_token: str, **options) -> (dict, dict):
     :raises InvalidKeyError
     """
     json_header, json_body = decode(jwt_token)
-    _validate_json_token(jwt_token, json_header, json_body, options)
+    if options.get('verify_signature', True):
+        _validate_json_token(jwt_token, json_header, json_body, options)
     return json_header, json_body
 
 
