@@ -112,4 +112,4 @@ def decode_base64(base64_encoded_string: str) -> bytes:
     missing_padding = len(base64_encoded_string) % 4
     if missing_padding != 0:  # Pad with extra = characters at the end
         base64_encoded_string += '=' * (4 - missing_padding)
-    return base64.b64decode(base64_encoded_string)
+    return base64.b64decode(base64_encoded_string, altchars='_+')

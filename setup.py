@@ -43,9 +43,9 @@ setup(name='oauth2helper',
           # Used to retrieve keys
           'requests==2.18.4',
           # Used to decode tokens
-          'pyjwt==1.6.0',
+          'pyjwt==1.6.1',
           # Used to handle certificate
-          'cryptography==2.1.4'
+          'cryptography==2.2.2'
       ],
       platforms=[
           'Windows'

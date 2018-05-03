@@ -6,6 +6,12 @@ List all changes in various categories:
 * Bug fixes
 * Known issues
 
+## Version 1.1.0 (2018-05-03) ##
+
+### Bug fixes ###
+
+- Handle _ in base64 encoded token.
+
 ## Version 1.0.0 (2018-03-05) ##
 
 ### Release notes ###
