@@ -1,5 +1,10 @@
 # Provide information on OAuth2 #
 
+This python module provides:
+
+ * Validation of OAuth2 token
+ * Extraction of data from validated (or decoded) token.
+
 ## Validating an OAuth2 token ##
 
 ```python
