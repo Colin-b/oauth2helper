@@ -6,6 +6,12 @@ List all changes in various categories:
 * Bug fixes
 * Known issues
 
+## Version 1.2.0 (2018-09-04) ##
+
+### Enhancements ###
+
+- Add content.get function to retrieve any value from JSON body.
+
 ## Version 1.1.1 (2018-08-09) ##
 
 ### Bug fixes ###
