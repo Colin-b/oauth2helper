@@ -9,7 +9,7 @@ List all changes in various categories:
 ## Version 1.3.0 (2018-11-16) ##
 
 ### Enhancements ###
-- Upgrade requests module to lastest (2.20.1)
+- Upgrade requests module to latest (2.20.1)
 
 ## Version 1.2.0 (2018-09-04) ##
 
