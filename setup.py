@@ -43,7 +43,7 @@ setup(
     ],
     install_requires=[
         # Used to retrieve keys
-        'requests==2.19.1',
+        'requests==2.20.1',
         # Used to decode tokens
         'pyjwt==1.6.4',
         # Used to handle certificate
