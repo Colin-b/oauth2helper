@@ -37,18 +37,22 @@ setup(
         'jwt'
     ],
     packages=find_packages(exclude=['tests']),
-    tests_require=[
-        # Used to run tests
-        'nose'
-    ],
     install_requires=[
         # Used to retrieve keys
-        'requests==2.20.1',
+        'requests==2.21.0',
         # Used to decode tokens
-        'pyjwt==1.6.4',
+        'pyjwt==1.7.1',
         # Used to handle certificate
-        'cryptography==2.3'
+        'cryptography==2.4.2'
     ],
+    extras_require={
+        'testing': [
+            # Used to run tests
+            'nose==1.3.7',
+            # Used to check code coverage
+            'coverage==4.5.2',
+        ],
+    },
     platforms=[
         'Windows'
     ]
