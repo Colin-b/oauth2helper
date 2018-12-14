@@ -6,10 +6,17 @@ List all changes in various categories:
 * Bug fixes
 * Known issues
 
+## Version 1.4.0 (2018-12-14) ##
+
+### Enhancements ###
+
+- Update dependencies to latest version (requests 2.21.0, cryptography 2.4.2)
+
 ## Version 1.3.0 (2018-11-16) ##
 
 ### Enhancements ###
-- Upgrade requests module to latest (2.20.1)
+
+- Update dependencies to latest version (requests 2.20.1)
 
 ## Version 1.2.0 (2018-09-04) ##
 
