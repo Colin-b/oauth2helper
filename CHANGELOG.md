@@ -6,6 +6,12 @@ List all changes in various categories:
 * Bug fixes
 * Known issues
 
+## Version 1.5.0 (2019-02-22) ##
+
+### Enhancements ###
+
+- Update dependencies to latest version (cryptography 2.5)
+
 ## Version 1.4.0 (2018-12-14) ##
 
 ### Enhancements ###
