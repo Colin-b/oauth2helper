@@ -1,3 +1,3 @@
 @Library('jenkins-lib') _
 
-pythonModulePipeline('oauth2helper', 66)
+pythonModulePipeline('oauth2helper', 84)
