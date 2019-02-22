@@ -39,7 +39,7 @@ setup(
         # Used to decode tokens
         "pyjwt==1.7.1",
         # Used to handle certificate
-        "cryptography==2.4.2",
+        "cryptography==2.5",
     ],
     extras_require={
         "testing": [
@@ -47,6 +47,8 @@ setup(
             "nose==1.3.7",
             # Used to check code coverage
             "coverage==4.5.2",
+            # Used to run tests (Jenkins)
+            "pytest-cov==2.6.1",
         ]
     },
     platforms=["Windows"],
