@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-from oauth2helper._version import __version__
+from oauth2helper.version import __version__
 
 this_dir = os.path.abspath(os.path.dirname(__file__))
 
@@ -39,16 +39,12 @@ setup(
         # Used to decode tokens
         "pyjwt==1.7.1",
         # Used to handle certificate
-        "cryptography==2.5",
+        "cryptography==2.6.1",
     ],
     extras_require={
         "testing": [
             # Used to run tests
-            "nose==1.3.7",
-            # Used to check code coverage
-            "coverage==4.5.2",
-            # Used to run tests (Jenkins)
-            "pytest-cov==2.6.1",
+            "pytest-cov==2.6.1"
         ]
     },
     platforms=["Windows"],
