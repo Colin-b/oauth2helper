@@ -1,51 +1,50 @@
 import os
 from setuptools import setup, find_packages
 
-from oauth2helper.version import __version__
-
 this_dir = os.path.abspath(os.path.dirname(__file__))
 
 with open(os.path.join(this_dir, "README.md"), "r") as f:
     long_description = f.read()
 
-# More information on properties: https://packaging.python.org/distributing
 setup(
     name="oauth2helper",
-    version=__version__,
-    author="Engie",
-    # TODO Provide a support mailbox for our products
-    author_email="colin.bounouar@engie.com",
-    maintainer="Engie",
-    # TODO Provide a support mailbox for our products
-    maintainer_email="colin.bounouar@engie.com",
-    url="https://github.tools.digital.engie.com/GEM-Py/oauth2helper",
+    version=open("oauth2helper/version.py").readlines()[-1].split()[-1].strip("\"'"),
     description="Provide information on OAuth2",
     long_description=long_description,
-    # TODO Package to artifactory and assert that bamboo will keep it up to date
-    download_url="http://www.engie.com",
-    classifiers=[
-        "Development Status :: 3 - Beta",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Operating System :: Microsoft :: Windows :: Windows 7",
-    ],
-    keywords=["security", "oauth2", "jwt"],
+    long_description_content_type="text/markdown",
     packages=find_packages(exclude=["tests"]),
     install_requires=[
         # Used to retrieve keys
-        "requests==2.21.0",
+        "requests==2.22.0",
         # Used to decode tokens
         "pyjwt==1.7.1",
         # Used to handle certificate
-        "cryptography==2.6.1",
+        "cryptography==2.7",
     ],
     extras_require={
         "testing": [
             # Used to run tests
-            "pytest-cov==2.6.1"
+            "pytest==5.0.1"
         ]
     },
-    platforms=["Windows"],
+    python_requires=">=3.6",
+    project_urls={
+        "Changelog": "https://github.tools.digital.engie.com/GEM-Py/oauth2helper/blob/development/CHANGELOG.md",
+        "Issues": "https://github.tools.digital.engie.com/GEM-Py/oauth2helper/issues",
+    },
+    license="MIT",
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Topic :: Software Development :: Build Tools",
+        "Operating System :: Microsoft :: Windows :: Windows 7",
+    ],
+    keywords=["security", "oauth2", "jwt"],
+    platforms=["Windows", "Linux"],
 )
