@@ -110,11 +110,11 @@ def _request_x5c(json_body: dict, key_identifier: str) -> str:
 
 
 def _to_json(base_64_json: str) -> dict:
-    decoded_json = decode_base64(base_64_json)
+    decoded_json = _decode_base64(base_64_json)
     return json.loads(decoded_json.decode("unicode_escape"))
 
 
-def decode_base64(base64_encoded_string: str) -> bytes:
+def _decode_base64(base64_encoded_string: str) -> bytes:
     """
     Decode base64, padding (with = character) being optional.
 
