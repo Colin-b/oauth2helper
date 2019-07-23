@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2019-07-23
+### Changed
+- Update requests to version 2.22.0.
+- Add a contributing documentation
+- Add License
+- Rely on latest version of pytest instead of pytest-cov
+- All available functions are exposed via oauth2helper instead of a submodule
+
 ## [1.6.0] - 2019-04-11
 ### Added
 - version is now in a public file.
@@ -51,7 +59,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Return a user friendly exception in case it is not possible to split token.
 - Update dependencies to latest version.
 
-[Unreleased]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.5.0...HEAD
+[Unreleased]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.7.0...HEAD
+[1.7.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.6.0...v1.7.0
+[1.6.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.2.0...v1.3.0

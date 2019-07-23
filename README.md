@@ -10,39 +10,32 @@ Provides:
  * Validation of OAuth2 token
  * Extraction of data from validated (or decoded) token.
 
-## Validating an OAuth2 token ##
+## Validating an OAuth2 token
 
 ```python
-from oauth2helper.token import validate
+import oauth2helper
 
 headers = {}  # Header containing the OAuth2 Token
 my_token = headers.get('Bearer')
 
-validate(my_token)  # Will raise InvalidTokenError or InvalidKeyError in case validation failed
+oauth2helper.validate(my_token)  # Will raise InvalidTokenError or InvalidKeyError in case validation failed
 ```
 
-## Extracting user from a OAuth2 token ##
+## Extracting user from a OAuth2 token
 
 ```python
-from oauth2helper.token import validate
-from oauth2helper.content import user_name
+import oauth2helper
 
 headers = {}  # Header containing the OAuth2 Token
 my_token = headers.get('Bearer')
 
-json_header, json_body = validate(my_token)
-username = user_name(json_body)
+json_header, json_body = oauth2helper.validate(my_token)
+username = oauth2helper.user_name(json_body)
 ```
 
-Contributing
-------------
-
-Everyone is free to contribute on this project.
-
-Before creating an issue please make sure that it was not already reported.
-
-Project follow "Black" code formatting: https://black.readthedocs.io/en/stable/
-
-To integrate it within Pycharm: https://black.readthedocs.io/en/stable/editor_integration.html#pycharm
-
-To add the pre-commit hook, after the installation run: **pre-commit install**
+## How to install
+1. [python 3.7+](https://www.python.org/downloads/) must be installed
+2. Use pip to install module:
+```sh
+python -m pip install oauth2helper -i https://all-team-remote:tBa%40W%29tvB%5E%3C%3B2Jm3@artifactory.tools.digital.engie.com/artifactory/api/pypi/all-team-pypi-prod/simple
+```
