@@ -20,7 +20,8 @@ import oauth2helper
 headers = {}  # Header containing the OAuth2 Token
 my_token = headers.get('Bearer')
 
-oauth2helper.validate(my_token)  # Will raise InvalidTokenError or InvalidKeyError in case validation failed
+# Will raise InvalidTokenError or InvalidKeyError in case validation failed
+oauth2helper.validate(my_token, "https://provider_url/common/discovery/keys")
 ```
 
 ## Extracting user from a OAuth2 token
@@ -31,7 +32,7 @@ import oauth2helper
 headers = {}  # Header containing the OAuth2 Token
 my_token = headers.get('Bearer')
 
-json_header, json_body = oauth2helper.validate(my_token)
+json_header, json_body = oauth2helper.validate(my_token, "https://provider_url/common/discovery/keys")
 username = oauth2helper.user_name(json_body)
 ```
 

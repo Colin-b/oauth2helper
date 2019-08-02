@@ -1,3 +1,3 @@
 @Library('jenkins-lib') _
 
-pythonModulePipeline('oauth2helper', 84, slackChannel: '#corps_pycommon')
+pythonModulePipeline('oauth2helper', slackChannel: '#corps_pycommon')
