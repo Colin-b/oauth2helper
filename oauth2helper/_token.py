@@ -19,11 +19,12 @@ _default_options = {
 }
 
 
-def validate(jwt_token: str, **options) -> (dict, dict):
+def validate(jwt_token: str, identity_provider_url: str, **options) -> (dict, dict):
     """
     Validate base64 encoded token and return JSON header and body as a tuple.
 
     :param jwt_token: JWT Token (base64 encoded) as provided in Bearer header.
+    :param identity_provider_url: URL to fetch keys from (will certainly ends with /common/discovery/keys)
 
     :param verify_signature: Default to True
     :param verify_exp: Check token expiry. Default to True
@@ -37,7 +38,7 @@ def validate(jwt_token: str, **options) -> (dict, dict):
     :raises InvalidKeyError
     """
     json_header, json_body = decode(jwt_token)
-    _validate_json_token(jwt_token, json_header, json_body, options)
+    _validate_json_token(jwt_token, json_header, options, identity_provider_url)
     return json_header, json_body
 
 
@@ -60,20 +61,18 @@ def decode(jwt_token: str) -> (dict, dict):
 
 
 def _validate_json_token(
-    jwt_token: str, json_header: dict, json_body: dict, options: dict
+    jwt_token: str, json_header: dict, options: dict, identity_provider_url: str
 ):
-    public_key = _get_public_key(json_body, json_header)
+    public_key = _get_public_key(json_header, identity_provider_url)
     logging.debug(f"Public key: {public_key}")
     jwt.decode(jwt_token, public_key, options={**_default_options, **options})
 
 
-def _get_public_key(json_body: dict, json_header: dict):
-    key_identifier = json_header.get("kid")
-    if not key_identifier:
-        raise InvalidTokenError("Key identifier (kid) cannot be found in JSON header.")
+def _get_public_key(json_header: dict, identity_provider_url: str) -> str:
+    key_identifier = json_header.get("kid", "not provided")
 
     # TODO cache this
-    x5c = _request_x5c(json_body, key_identifier)
+    x5c = _request_x5c(key_identifier, identity_provider_url)
 
     certificate_text = (
         b"-----BEGIN CERTIFICATE-----\n"
@@ -84,29 +83,18 @@ def _get_public_key(json_body: dict, json_header: dict):
     return certificate.public_key()
 
 
-def _request_x5c(json_body: dict, key_identifier: str) -> str:
-    identity_supplier_service = json_body.get("iss")
-    if identity_supplier_service is None:
+def _request_x5c(key_identifier: str, identity_provider_url: str) -> str:
+    keys = requests.get(identity_provider_url)
+    if not keys:
+        raise InvalidTokenError(f"Identify provider cannot be reached: {keys.text}")
+    keys = keys.json().get("keys", [])
+    keys = {key["kid"]: key["x5c"][0] for key in keys}
+
+    if key_identifier not in keys:
         raise InvalidTokenError(
-            "Identity supplier service (iss) cannot be found in JSON body."
+            f"{key_identifier} is not a valid key identifier. Valid ones are {list(keys)}."
         )
-
-    tenant_identifier = json_body.get("tid")
-    if tenant_identifier is None:
-        raise InvalidTokenError("Tenant identifier (tid) cannot be found in JSON body.")
-
-    identity_provider_url = identity_supplier_service.split(tenant_identifier)[0]
-
-    keys_response = requests.get(f"{identity_provider_url}common/discovery/keys")
-    keys = keys_response.json().get("keys", [])
-
-    for key in keys:
-        if key["kid"] == key_identifier:
-            return key["x5c"][0]
-
-    raise InvalidTokenError(
-        f'{key_identifier} is not a valid key identifier. Valid ones are {[key["kid"] for key in keys]}.'
-    )
+    return keys[key_identifier]
 
 
 def _to_json(base_64_json: str) -> dict:

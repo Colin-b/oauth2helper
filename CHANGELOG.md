@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2019-08-02
+### Changed
+- Token validation now requires to supply the identity provider URL. Relying on the one in the token was a security issue.
+- A proper error is now raised in case identity provider URL cannot be reached.
+
 ## [2.0.0] - 2019-07-23
 ### Changed
 - Update requests to version 2.22.0.
@@ -59,8 +64,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Return a user friendly exception in case it is not possible to split token.
 - Update dependencies to latest version.
 
-[Unreleased]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.7.0...HEAD
-[1.7.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.6.0...v1.7.0
+[Unreleased]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v3.0.0...HEAD
+[3.0.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v2.0.0...v3.0.0
+[2.0.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.6.0...v2.0.0
 [1.6.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.3.0...v1.4.0

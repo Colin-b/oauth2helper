@@ -23,8 +23,8 @@ setup(
     ],
     extras_require={
         "testing": [
-            # Used to run tests
-            "pytest==5.0.1"
+            # Used to mock requests
+            "pytest-responses"
         ]
     },
     python_requires=">=3.6",
