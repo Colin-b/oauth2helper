@@ -1,4 +1,4 @@
-<h2 align="center">OAuth2 helper</h2>
+<h2 align="center">Validate and extract information from OAuth2 token</h2>
 
 <p align="center">
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>

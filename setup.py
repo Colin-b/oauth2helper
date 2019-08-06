@@ -9,7 +9,7 @@ with open(os.path.join(this_dir, "README.md"), "r") as f:
 setup(
     name="oauth2helper",
     version=open("oauth2helper/version.py").readlines()[-1].split()[-1].strip("\"'"),
-    description="Provide information on OAuth2",
+    description="Validate and extract information from OAuth2 token.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(exclude=["tests"]),
@@ -24,7 +24,7 @@ setup(
     extras_require={
         "testing": [
             # Used to mock requests
-            "pytest-responses"
+            "pytest-responses==0.4.0"
         ]
     },
     python_requires=">=3.6",
