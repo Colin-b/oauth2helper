@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.1] - 2019-08-06
+### Fixed
+- pytest-responses version is now fixed to 0.4.0.
+
 ## [3.0.0] - 2019-08-02
 ### Changed
 - Token validation now requires to supply the identity provider URL. Relying on the one in the token was a security issue.
@@ -64,7 +68,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Return a user friendly exception in case it is not possible to split token.
 - Update dependencies to latest version.
 
-[Unreleased]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v3.0.0...HEAD
+[Unreleased]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v3.0.1...HEAD
+[3.0.1]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.6.0...v2.0.0
 [1.6.0]: https://github.tools.digital.engie.com/GEM-Py/oauth2helper/compare/v1.5.0...v1.6.0
