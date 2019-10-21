@@ -19,7 +19,7 @@ setup(
         # Used to decode tokens
         "pyjwt==1.7.1",
         # Used to handle certificate
-        "cryptography==2.7",
+        "cryptography==2.8",
     ],
     extras_require={
         "testing": [
@@ -29,8 +29,8 @@ setup(
     },
     python_requires=">=3.6",
     project_urls={
-        "Changelog": "https://github.tools.digital.engie.com/GEM-Py/oauth2helper/blob/master/CHANGELOG.md",
-        "Issues": "https://github.tools.digital.engie.com/GEM-Py/oauth2helper/issues",
+        "Changelog": "https://github.tools.digital.engie.com/gempy/oauth2helper/blob/master/CHANGELOG.md",
+        "Issues": "https://github.tools.digital.engie.com/gempy/oauth2helper/issues",
     },
     license="MIT",
     classifiers=[
@@ -42,8 +42,8 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Build Tools",
-        "Operating System :: Microsoft :: Windows :: Windows 7",
     ],
     keywords=["security", "oauth2", "jwt"],
     platforms=["Windows", "Linux"],
