@@ -1,10 +1,11 @@
-import requests
 import base64
 import json
+import logging
+
+import requests
 import jwt
 from cryptography.x509 import load_pem_x509_certificate
 from cryptography.hazmat.backends import default_backend
-import logging
 from jwt.exceptions import InvalidTokenError
 
 _default_options = {
@@ -16,6 +17,10 @@ _default_options = {
     "require_exp": True,
     "require_iat": True,
     "require_nbf": True,
+    "algorithms": [
+        # Microsoft Azure Active Directory algorithm
+        "RS256"
+    ],
 }
 
 
@@ -34,6 +39,7 @@ def validate(jwt_token: str, identity_provider_url: str, **options) -> (dict, di
     :param require_exp: Default to True
     :param require_iat: Default to True
     :param require_nbf: Default to True
+    :param algorithms: Default to ["RS256"]
     :raises InvalidTokenError
     :raises InvalidKeyError
     """
@@ -65,7 +71,10 @@ def _validate_json_token(
 ):
     public_key = _get_public_key(json_header, identity_provider_url)
     logging.debug(f"Public key: {public_key}")
-    jwt.decode(jwt_token, public_key, options={**_default_options, **options})
+    options = {**_default_options, **options}
+    jwt.decode(
+        jwt_token, key=public_key, algorithms=options.pop("algorithms"), options=options
+    )
 
 
 def _get_public_key(json_header: dict, identity_provider_url: str) -> str:

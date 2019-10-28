@@ -38,7 +38,7 @@ Before creating an issue please make sure that it was not already reported.
 
 #### Code
 
-1) Create a new branch based on *development* branch.
+1) Create a new branch based on *develop* branch.
 2) Add your changes.
 3) Follow [Black](https://black.readthedocs.io/en/stable/) code formatting.
     * Install pre-commit python module using pip: **python -m pip install pre-commit**

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2019-10-28
+### Changed
+- Do not use fixed first level dependencies.
+
+### Added
+- Allow to provide algorithms, a list of authorized algorithms. Default to `["RS256"]`
+
 ## [3.1.0] - 2019-10-21
 ### Changed
 - Update [cryptography](https://github.com/pyca/cryptography/blob/master/CHANGELOG.rst) to version 2.8
@@ -73,7 +80,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Return a user friendly exception in case it is not possible to split token.
 - Update dependencies to latest version.
 
-[Unreleased]: https://github.tools.digital.engie.com/gempy/oauth2helper/compare/v3.1.0...HEAD
+[Unreleased]: https://github.tools.digital.engie.com/gempy/oauth2helper/compare/v3.2.0...HEAD
+[3.2.0]: https://github.tools.digital.engie.com/gempy/oauth2helper/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.tools.digital.engie.com/gempy/oauth2helper/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.tools.digital.engie.com/gempy/oauth2helper/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.tools.digital.engie.com/gempy/oauth2helper/compare/v2.0.0...v3.0.0

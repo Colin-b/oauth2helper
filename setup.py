@@ -15,16 +15,16 @@ setup(
     packages=find_packages(exclude=["tests"]),
     install_requires=[
         # Used to retrieve keys
-        "requests==2.22.0",
+        "requests==2.*",
         # Used to decode tokens
-        "pyjwt==1.7.1",
+        "pyjwt==1.*",
         # Used to handle certificate
-        "cryptography==2.8",
+        "cryptography==2.*",
     ],
     extras_require={
         "testing": [
             # Used to mock requests
-            "pytest-responses==0.4.0"
+            "pytest-responses==0.4.*"
         ]
     },
     python_requires=">=3.6",
