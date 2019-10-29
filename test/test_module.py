@@ -1,5 +1,6 @@
 import pytest
 import jwt
+from responses import RequestsMock
 
 import oauth2helper
 
@@ -52,7 +53,7 @@ def test_missing_upn():
     assert str(exception_info.value) == "No upn (i.e. User ID) in JSON body."
 
 
-def test_validation_failure(responses):
+def test_validation_failure(responses: RequestsMock):
     responses.add(
         responses.GET,
         "https://test_id_provider",
@@ -73,7 +74,7 @@ def test_validation_failure(responses):
     assert str(exception_info.value) == "Signature verification failed"
 
 
-def test_validation_success_without_signature_check(responses):
+def test_validation_success_without_signature_check(responses: RequestsMock):
     responses.add(
         responses.GET,
         "https://test_id_provider",
@@ -90,7 +91,11 @@ def test_validation_success_without_signature_check(responses):
     )
     expired = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlNTUWRoSTFjS3ZoUUVEU0p4RTJnR1lzNDBRMCIsImtpZCI6IlNTUWRoSTFjS3ZoUUVEU0p4RTJnR1lzNDBRMCJ9.eyJhdWQiOiIyYmVmNzMzZC03NWJlLTQxNTktYjI4MC02NzJlMDU0OTM4YzMiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8yNDEzOWQxNC1jNjJjLTRjNDctOGJkZC1jZTcxZWExZDUwY2YvIiwiaWF0IjoxNTIwMjcwNTAxLCJuYmYiOjE1MjAyNzA1MDEsImV4cCI6MTUyMDI3NDQwMSwiYWlvIjoiWTJOZ1lFaHlXMjYwVS9kR1RGeWNTMWNPVnczYnpqVXQ0Zk96TkNTekJYaWMyWTVOWFFNQSIsImFtciI6WyJwd2QiXSwiZmFtaWx5X25hbWUiOiJCb3Vub3VhciIsImdpdmVuX25hbWUiOiJDb2xpbiIsImlwYWRkciI6IjE5NC4yOS45OC4xNDQiLCJuYW1lIjoiQm91bm91YXIgQ29saW4gKEVOR0lFIEVuZXJneSBNYW5hZ2VtZW50KSIsIm5vbmNlIjoiW1x1MDAyNzczNjJDQUVBLTlDQTUtNEI0My05QkEzLTM0RDdDMzAzRUJBN1x1MDAyN10iLCJvaWQiOiJkZTZiOGVjYS01ZTEzLTRhZTEtODcyMS1mZGNmNmI0YTljZGQiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtMTQwOTA4MjIzMy0xNDE3MDAxMzMzLTY4MjAwMzMzMC0zNzY5NTQiLCJzdWIiOiI2eEZSV1FBaElOZ0I4Vy10MnJRVUJzcElGc1VyUXQ0UUZ1V1VkSmRxWFdnIiwidGlkIjoiMjQxMzlkMTQtYzYyYy00YzQ3LThiZGQtY2U3MWVhMWQ1MGNmIiwidW5pcXVlX25hbWUiOiJKUzUzOTFAZW5naWUuY29tIiwidXBuIjoiSlM1MzkxQGVuZ2llLmNvbSIsInV0aSI6InVmM0x0X1Q5aWsyc0hGQ01oNklhQUEiLCJ2ZXIiOiIxLjAifQ.addwLSoO-2t1kXgljqnaU-P1hQGHQBiJMcNCLwELhBZT_vHvkZHFrmgfcTzED_AMdB9mTpvUm_Mk0d3F3RzLtyCeAApOPJaRAwccAc3PB1pKTwjFhdzIXtxib0_MQ6_F1fhb8R8ZcLCbwhMtT8nXoeWJOvH9_71O_vkfOn6E-VwLo17jkvQJOa89KfctGNnHNMcPBBju0oIgp_UVal311SMUw_10i4GZZkjR2I1m7EMg5jMwQgUatYWv2J5HoefAQQDat9jJeEnYNITxsJMN81FHTyuvMnN_ulFzOGtcvlBpmP6jVHfEDoJiqFM4NFh6r4IlOs2U2-jUb_bR5xi2zg"
     json_header, json_body = oauth2helper.validate(
-        expired, "https://test_id_provider", verify_signature=False, verify_exp=False
+        expired,
+        "https://test_id_provider",
+        verify_signature=False,
+        verify_exp=False,
+        algorithms=["RS256"],
     )
     assert json_header == {
         "alg": "RS256",
@@ -134,7 +139,7 @@ def test_content_extraction_missing_key():
     assert "No qsdfqsdfqsdf in JSON body." == str(exception_info.value)
 
 
-def test_invalid_kid(responses):
+def test_invalid_kid(responses: RequestsMock):
     responses.add(
         responses.GET,
         "https://test_id_provider",
@@ -164,7 +169,7 @@ def test_invalid_kid(responses):
     )
 
 
-def test_identity_provider_error(responses):
+def test_identity_provider_error(responses: RequestsMock):
     responses.add(
         responses.GET,
         "https://test_id_provider",
