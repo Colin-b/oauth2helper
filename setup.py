@@ -45,6 +45,8 @@ setup(
         "testing": [
             # Used to mock requests
             "pytest-responses==0.4.*"
+            # Used to check coverage
+            "pytest-cov==2.*"
         ]
     },
     python_requires=">=3.6",
