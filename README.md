@@ -1,11 +1,12 @@
 <h2 align="center">Validate and extract information from OAuth2 token</h2>
 
 <p align="center">
-<a href='https://github.tools.digital.engie.com/gempy/oauth2helper/releases/latest'><img src='https://pse.tools.digital.engie.com/all/buildStatus/icon?job=team/oauth2helper/master&config=version'></a>
-<a href='https://pse.tools.digital.engie.com/all/job/team/view/Python%20modules/job/oauth2helper/job/master/'><img src='https://pse.tools.digital.engie.com/all/buildStatus/icon?job=team/oauth2helper/master'></a>
-<a href='https://pse.tools.digital.engie.com/all/job/team/view/Python%20modules/job/oauth2helper/job/master/cobertura/'><img src='https://pse.tools.digital.engie.com/all/buildStatus/icon?job=team/oauth2helper/master&config=testCoverage'></a>
+<a href="https://pypi.org/project/oauth2helper/"><img alt="pypi version" src="https://img.shields.io/pypi/v/oauth2helper"></a>
+<a href="https://travis-ci.org/Colin-b/oauth2helper"><img alt="Build status" src="https://api.travis-ci.org/Colin-b/oauth2helper.svg?branch=develop"></a>
+<a href="https://travis-ci.org/Colin-b/oauth2helper"><img alt="Coverage" src="https://img.shields.io/badge/coverage-100%25-brightgreen"></a>
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
-<a href='https://pse.tools.digital.engie.com/all/job/team/view/Python%20modules/job/oauth2helper/job/master/lastSuccessfulBuild/testReport/'><img src='https://pse.tools.digital.engie.com/all/buildStatus/icon?job=team/oauth2helper/master&config=testCount'></a>
+<a href="https://travis-ci.org/Colin-b/oauth2helper"><img alt="Number of tests" src="https://img.shields.io/badge/tests-13 passed-blue"></a>
+<a href="https://pypi.org/project/oauth2helper/"><img alt="Number of downloads" src="https://img.shields.io/pypi/dm/oauth2helper"></a>
 </p>
 
 Provides:
@@ -41,5 +42,5 @@ username = oauth2helper.user_name(json_body)
 1. [python 3.6+](https://www.python.org/downloads/) must be installed
 2. Use pip to install module:
 ```sh
-python -m pip install oauth2helper -i https://all-team-remote:tBa%40W%29tvB%5E%3C%3B2Jm3@artifactory.tools.digital.engie.com/artifactory/api/pypi/all-team-pypi-prod/simple
+python -m pip install oauth2helper
 ```
