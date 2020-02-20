@@ -47,6 +47,9 @@ setup(
             "pytest-responses==0.4.*",
             # Used to check coverage
             "pytest-cov==2.*",
+            # Used to test starlette specifics
+            "starlette==0.13.*",
+            "requests==2.*",
         ]
     },
     python_requires=">=3.6",
