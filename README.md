@@ -1,3 +1,6 @@
+<h1 align="center">This project is no longer maintained.</br>Please use layabauth module instead.</h1>
+</br>
+</br>
 <h2 align="center">Validate and extract information from OAuth2 token</h2>
 
 <p align="center">
